@@ -59,8 +59,9 @@ public class Exercises {
      */
     public static void exercise4(String message) {
         System.out.println(message);
-        //Write your code here
-
+        Predicate<Person> personId = person -> person.getId()==123;
+        Person findId = storage.findOne(personId);
+        System.out.println(findId);
         System.out.println("----------------------");
 
     }
@@ -71,7 +72,6 @@ public class Exercises {
      */
     public static void exercise5(String message) {
         System.out.println(message);
-        //Write your code here
 
         System.out.println("----------------------");
     }
