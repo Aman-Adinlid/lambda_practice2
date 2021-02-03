@@ -76,8 +76,8 @@ public class Exercises {
     public static void exercise5(String message) {
         System.out.println(message);
         Predicate<Person> findOnePredicate = person -> person.getId() == 456;
-        Function<Person,String> toString = person -> "name: "+ person.getFirstName() +" " + person.getLastName() +"born" + person.getBirthDate();
-        String findPersonNilsson = storage.findOneAndMapToString(findOnePredicate,toString);
+        Function<Person, String> toString = person -> "name: " + person.getFirstName() + " " + person.getLastName() + "born" + person.getBirthDate();
+        String findPersonNilsson = storage.findOneAndMapToString(findOnePredicate, toString);
         System.out.println(findPersonNilsson);
         System.out.println("----------------------");
     }
@@ -87,14 +87,10 @@ public class Exercises {
      */
     public static void exercise6(String message) {
         System.out.println(message);
-        Predicate<Person> AllMale = person -> person.getFirstName().startsWith("E")&& person.getGender()==Gender.MALE;
-        Function<Person,String> personStringFunction = person-> person.getFirstName() + " " + person.getLastName();
-        List<String> stringList = storage.findManyAndMapEachToString(AllMale,personStringFunction);
+        Predicate<Person> AllMale = person -> person.getFirstName().startsWith("E") && person.getGender() == Gender.MALE;
+        Function<Person, String> personStringFunction = person -> person.getFirstName() + " " + person.getLastName();
+        List<String> stringList = storage.findManyAndMapEachToString(AllMale, personStringFunction);
         stringList.forEach(System.out::println);
-
-
-        //Write your code here
-
         System.out.println("----------------------");
     }
 
@@ -117,8 +113,9 @@ public class Exercises {
      */
     public static void exercise8(String message) {
         System.out.println(message);
-        //Write your code here
-
+        Predicate<Person> allPeople = person -> person.getFirstName().contains("Ulf");
+        Consumer<Person> iterate = person -> System.out.println(person.getFirstName() + " " + person.getLastName());
+        storage.findAndDo(allPeople, iterate);
         System.out.println("----------------------");
     }
 
@@ -127,7 +124,6 @@ public class Exercises {
      */
     public static void exercise9(String message) {
         System.out.println(message);
-        //Write your code here
 
         System.out.println("----------------------");
     }
