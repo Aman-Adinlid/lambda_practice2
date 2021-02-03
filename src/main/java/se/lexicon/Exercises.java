@@ -25,8 +25,6 @@ public class Exercises {
         Predicate<Person> firstNameCondition = person -> person.getFirstName().equalsIgnoreCase("Erik");
         List<Person> personsWithErikName = storage.findMany(firstNameCondition);
         personsWithErikName.forEach(person -> System.out.println(person));
-        //Write your code here
-
         System.out.println("----------------------");
     }
 
@@ -38,10 +36,6 @@ public class Exercises {
         Predicate<Person> findALLFemale = person -> person.getGender() == Gender.FEMALE;
         List<Person> females = storage.findMany(findALLFemale);
         females.forEach(person -> System.out.println(person));
-
-
-        //Write your code here
-
         System.out.println("----------------------");
     }
 
@@ -53,8 +47,6 @@ public class Exercises {
         Predicate<Person> bornAfter = person -> person.getBirthDate().isAfter(LocalDate.of(2000, 01, 01));
         List<Person> whoBorn = storage.findMany(bornAfter);
         whoBorn.forEach(person -> System.out.println(person));
-        //Write your code here
-
         System.out.println("----------------------");
     }
 
@@ -77,7 +69,8 @@ public class Exercises {
     public static void exercise5(String message) {
         System.out.println(message);
         Predicate<Person> findOnePredicate = person -> person.getId() == 456;
-        Function<Person, String> toString = person -> "name: " + person.getFirstName() + " " + person.getLastName() + "born" + person.getBirthDate();
+        Function<Person, String> toString = person -> "name: " + person.getFirstName() + " " + person.getLastName()
+                + "born" + person.getBirthDate();
         String findPersonNilsson = storage.findOneAndMapToString(findOnePredicate, toString);
         System.out.println(findPersonNilsson);
         System.out.println("----------------------");
@@ -171,7 +164,6 @@ public class Exercises {
      */
     public static void exercise13(String message) {
         System.out.println(message);
-        //Write your code here
 
         System.out.println("----------------------");
     }
