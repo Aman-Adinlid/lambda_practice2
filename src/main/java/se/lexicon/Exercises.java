@@ -87,6 +87,12 @@ public class Exercises {
      */
     public static void exercise6(String message) {
         System.out.println(message);
+        Predicate<Person> AllMale = person -> person.getFirstName().startsWith("E")&& person.getGender()==Gender.MALE;
+        Function<Person,String> personStringFunction = person-> person.getFirstName() + " " + person.getLastName();
+        List<String> stringList = storage.findManyAndMapEachToString(AllMale,personStringFunction);
+        stringList.forEach(System.out::println);
+
+
         //Write your code here
 
         System.out.println("----------------------");
