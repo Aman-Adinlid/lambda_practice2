@@ -125,10 +125,10 @@ public class Exercises {
      */
     public static void exercise9(String message) {
         System.out.println(message);
-         Predicate<Person> LastName = person -> person.getLastName().startsWith(person.getFirstName());
-         Consumer<Person> personConsumer = person -> System.out.println(person.getFirstName()+ " "+ person.getLastName());
-         storage.findAndDo(LastName,personConsumer);
-         System.out.println("----------------------");
+        Predicate<Person> LastName = person -> person.getLastName().startsWith(person.getFirstName());
+        Consumer<Person> personConsumer = person -> System.out.println(person.getFirstName() + " " + person.getLastName());
+        storage.findAndDo(LastName, personConsumer);
+        System.out.println("----------------------");
     }
 
     /*
@@ -148,10 +148,10 @@ public class Exercises {
      */
     public static void exercise11(String message) {
         System.out.println(message);
-        Predicate<Person> firstNameA = person -> person.getFirstName().startsWith("A")&& person.getBirthDate()==person.getBirthDate();
+        Predicate<Person> firstNameA = person -> person.getFirstName().startsWith("A") && person.getBirthDate() == person.getBirthDate();
         Comparator<Person> firstName = (o1, o2) -> o1.getFirstName().compareTo(o2.getFirstName());
         Comparator<Person> birthdate = (o1, o2) -> o1.getBirthDate().compareTo(o2.getBirthDate());
-        storage.findAndSort(firstNameA,birthdate).forEach(System.out::println);
+        storage.findAndSort(firstNameA, birthdate).forEach(System.out::println);
         System.out.println("----------------------");
     }
 
@@ -160,8 +160,9 @@ public class Exercises {
      */
     public static void exercise12(String message) {
         System.out.println(message);
-        //Write your code here
-
+        Predicate<Person> FindWhoBornBefore1950 = person -> person.getBirthDate().isBefore(LocalDate.of(1950, 01, 1));
+        Comparator<Person> personComparator = (o1, o2) -> o1.getBirthDate().compareTo(o2.getBirthDate());
+        storage.findAndSort(FindWhoBornBefore1950, personComparator).forEach(System.out::println);
         System.out.println("----------------------");
     }
 
