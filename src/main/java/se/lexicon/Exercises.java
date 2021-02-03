@@ -1,8 +1,10 @@
 package se.lexicon;
 
 import se.lexicon.data.DataStorage;
+import se.lexicon.model.Gender;
 import se.lexicon.model.Person;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -28,6 +30,13 @@ public class Exercises {
      */
     public static void exercise2(String message){
         System.out.println(message);
+        Predicate<Person> findALLFemale = person -> person.getGender()== Gender.FEMALE;
+        List<Person> females = storage.findMany(findALLFemale);
+        females.forEach(person -> System.out.println(person));
+
+
+
+
         //Write your code here
 
         System.out.println("----------------------");
