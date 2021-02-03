@@ -1,6 +1,10 @@
 package se.lexicon;
 
 import se.lexicon.data.DataStorage;
+import se.lexicon.model.Person;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 public class Exercises {
 
@@ -11,6 +15,9 @@ public class Exercises {
     */
     public static void exercise1(String message){
         System.out.println(message);
+        Predicate<Person> firstNameCondition = person -> person.getFirstName().equalsIgnoreCase("Erik");
+        List<Person> personsWithErikName = storage.findMany(firstNameCondition);
+        personsWithErikName.forEach(person -> System.out.println(person));
         //Write your code here
 
         System.out.println("----------------------");
