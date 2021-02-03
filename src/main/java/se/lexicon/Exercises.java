@@ -7,6 +7,7 @@ import se.lexicon.model.Person;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -114,8 +115,8 @@ public class Exercises {
     public static void exercise8(String message) {
         System.out.println(message);
         Predicate<Person> allPeople = person -> person.getFirstName().contains("Ulf");
-        Consumer<Person> iterate = person -> System.out.println(person.getFirstName() + " " + person.getLastName());
-        storage.findAndDo(allPeople, iterate);
+        Consumer<Person> personConsumer = person -> System.out.println(person.getFirstName() + " " + person.getLastName());
+        storage.findAndDo(allPeople, personConsumer);
         System.out.println("----------------------");
     }
 
@@ -124,8 +125,10 @@ public class Exercises {
      */
     public static void exercise9(String message) {
         System.out.println(message);
-
-        System.out.println("----------------------");
+         Predicate<Person> LastName = person -> person.getLastName().startsWith(person.getFirstName());
+         Consumer<Person> personConsumer = person -> System.out.println(person.getFirstName()+ " "+ person.getLastName());
+         storage.findAndDo(LastName,personConsumer);
+         System.out.println("----------------------");
     }
 
     /*
@@ -145,8 +148,10 @@ public class Exercises {
      */
     public static void exercise11(String message) {
         System.out.println(message);
-        //Write your code here
-
+        Predicate<Person> firstNameA = person -> person.getFirstName().startsWith("A")&& person.getBirthDate()==person.getBirthDate();
+        Comparator<Person> firstName = (o1, o2) -> o1.getFirstName().compareTo(o2.getFirstName());
+        Comparator<Person> birthdate = (o1, o2) -> o1.getBirthDate().compareTo(o2.getBirthDate());
+        storage.findAndSort(firstNameA,birthdate).forEach(System.out::println);
         System.out.println("----------------------");
     }
 
