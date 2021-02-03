@@ -5,6 +5,7 @@ import se.lexicon.model.Person;
 import se.lexicon.util.PersonGenerator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
@@ -47,30 +48,53 @@ public class DataStorageImpl implements DataStorage {
 
     @Override
     public Person findOne(Predicate<Person> filter) {
+        for (Person person : personList) {
+            if (filter.test(person)) ;
+            return person;
+        }
         return null;
     }
 
     @Override
     public String findOneAndMapToString(Predicate<Person> filter, Function<Person, String> personToString) {
-        return null;
+        Person findPerson = findOne(filter);
+        if (findPerson != null){
+            return personToString.apply(findPerson);
     }
+    return null;
+
+}
 
     @Override
     public List<String> findManyAndMapEachToString(Predicate<Person> filter, Function<Person, String> personToString) {
-        return null;
+          List<Person>  personListFilter = findMany(filter);
+          List<String> stringList = new ArrayList<>();
+          for (Person person: personListFilter){
+              String convertedResult = personToString.apply(person);
+              stringList.add(convertedResult);
+          }
+              return stringList;
     }
 
     @Override
     public void findAndDo(Predicate<Person> filter, Consumer<Person> consumer) {
+        List<Person> find = findMany(filter);
+        for (Person person: find){
+            consumer.accept(person);
+        }
     }
 
     @Override
     public List<Person> findAndSort(Comparator<Person> comparator) {
-        return null;
+        List<Person> copy = new ArrayList<>(personList);
+        Collections.sort(copy,comparator);
+        return copy;
     }
 
     @Override
     public List<Person> findAndSort(Predicate<Person> filter, Comparator<Person> comparator) {
-        return null;
+        List<Person> personList = findMany(filter);
+        personList.sort(comparator);
+        return personList;
     }
 }
