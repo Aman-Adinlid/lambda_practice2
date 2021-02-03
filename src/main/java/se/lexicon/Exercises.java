@@ -46,7 +46,7 @@ public class Exercises {
      */
     public static void exercise3(String message) {
         System.out.println(message);
-        Predicate<Person> bornAfter = person -> person.getBirthDate().isAfter(LocalDate.of(200,01,01));
+        Predicate<Person> bornAfter = person -> person.getBirthDate().isAfter(LocalDate.of(2000,01,01));
         List<Person> whoBorn = storage.findMany(bornAfter);
         whoBorn.forEach(person -> System.out.println(person));
         //Write your code here
