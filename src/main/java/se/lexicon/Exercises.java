@@ -5,8 +5,11 @@ import se.lexicon.model.Gender;
 import se.lexicon.model.Person;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class Exercises {
@@ -46,7 +49,7 @@ public class Exercises {
      */
     public static void exercise3(String message) {
         System.out.println(message);
-        Predicate<Person> bornAfter = person -> person.getBirthDate().isAfter(LocalDate.of(2000,01,01));
+        Predicate<Person> bornAfter = person -> person.getBirthDate().isAfter(LocalDate.of(2000, 01, 01));
         List<Person> whoBorn = storage.findMany(bornAfter);
         whoBorn.forEach(person -> System.out.println(person));
         //Write your code here
@@ -59,7 +62,7 @@ public class Exercises {
      */
     public static void exercise4(String message) {
         System.out.println(message);
-        Predicate<Person> personId = person -> person.getId()==123;
+        Predicate<Person> personId = person -> person.getId() == 123;
         Person findId = storage.findOne(personId);
         System.out.println(findId);
         System.out.println("----------------------");
@@ -72,7 +75,10 @@ public class Exercises {
      */
     public static void exercise5(String message) {
         System.out.println(message);
-
+        Predicate<Person> findOnePredicate = person -> person.getId() == 456;
+        Function<Person,String> toString = person -> "name: "+ person.getFirstName() +" " + person.getLastName() +"born" + person.getBirthDate();
+        String findPersonNilsson = storage.findOneAndMapToString(findOnePredicate,toString);
+        System.out.println(findPersonNilsson);
         System.out.println("----------------------");
     }
 
@@ -92,8 +98,11 @@ public class Exercises {
      */
     public static void exercise7(String message) {
         System.out.println(message);
-        //Write your code here
-
+        Function<Person, String> mapper = person -> person.getFirstName() + " " + person.getLastName() + " "
+                + Period.between(person.getBirthDate(), LocalDate.now()) + "years";
+        Predicate<Person> personPredicate = person -> Period.between(person.getBirthDate(), LocalDate.now()).getYears() < 10;
+        List<String> result = storage.findManyAndMapEachToString(personPredicate, mapper);
+        result.forEach(System.out::println);
         System.out.println("----------------------");
     }
 
@@ -122,8 +131,10 @@ public class Exercises {
      */
     public static void exercise10(String message) {
         System.out.println(message);
-        //Write your code here
-
+        Predicate<Person> personFirstNamePalindrome = person -> new StringBuilder(person.getFirstName())
+                .reverse().toString().equalsIgnoreCase(person.getFirstName());
+        Consumer<Person> pinter = person -> System.out.println(person.getFirstName() + " " + person.getLastName());
+        storage.findAndDo(personFirstNamePalindrome, pinter);
         System.out.println("----------------------");
     }
 
