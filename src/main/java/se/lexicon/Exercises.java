@@ -92,7 +92,7 @@ public class Exercises {
 
     /*
         7.	Find all people who are below age of 10 and convert them to a String like this:
-            “Olle Svensson 9 years”. Use findManyAndMapEachToString() method.
+            Olle Svensson 9 years”. Use findManyAndMapEachToString() method.
      */
     public static void exercise7(String message) {
         System.out.println(message);
