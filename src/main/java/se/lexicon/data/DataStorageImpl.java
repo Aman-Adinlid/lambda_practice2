@@ -49,8 +49,8 @@ public class DataStorageImpl implements DataStorage {
     @Override
     public Person findOne(Predicate<Person> filter) {
         for (Person person : personList) {
-            if (filter.test(person)) ;
-            return person;
+            if (filter.test(person)) return person;
+
         }
         return null;
     }

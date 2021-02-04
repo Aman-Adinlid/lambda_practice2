@@ -9,6 +9,7 @@ import java.time.Period;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -69,10 +70,11 @@ public class Exercises {
     public static void exercise5(String message) {
         System.out.println(message);
         Predicate<Person> findOnePredicate = person -> person.getId() == 456;
-        Function<Person, String> toString = person -> "name: " + person.getFirstName() + " " + person.getLastName()
-                + "born" + person.getBirthDate();
-        String findPersonNilsson = storage.findOneAndMapToString(findOnePredicate, toString);
-        System.out.println(findPersonNilsson);
+        Function<Person, String> toString = person -> "name:  " + person.getFirstName() + " " + person.getLastName()
+                + " born " + person.getBirthDate();
+
+        String findPersonById = storage.findOneAndMapToString(findOnePredicate, toString);
+        System.out.println(findPersonById);
         System.out.println("----------------------");
     }
 
@@ -164,7 +166,15 @@ public class Exercises {
      */
     public static void exercise13(String message) {
         System.out.println(message);
-
+        Comparator<Person> firstNameComparator = Comparator.comparing(Person::getFirstName);
+        Comparator<Person> lastNameComparator = Comparator.comparing(Person::getLastName);
+        Comparator<Person> birthDatePersonComparator = Comparator.comparing(Person::getBirthDate);
+        List<Person> personList = storage.findAndSort(lastNameComparator.thenComparing(firstNameComparator).thenComparing(birthDatePersonComparator));
         System.out.println("----------------------");
+        personList.forEach(System.out::println);
+        System.out.println("----------------------");
+
+
     }
 }
+
